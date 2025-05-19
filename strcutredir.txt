@@ -1,0 +1,64 @@
+ansible-project/
+├── .gitignore
+├── README.md
+├── ansible.cfg
+├── inventory/
+│   ├── production
+│   ├── group_vars/
+│   │   ├── webservers.yml
+│   │   ├── backends.yml
+│   │   ├── loadbalancers.yml
+│   │   └── databases.yml
+│   └── host_vars/
+│       └── web01.yml
+├── group_vars/
+│   ├── all.yml
+│   └── databases/
+│       └── secrets.yml  # Vault-encrypted
+├── playbooks/
+│   └── deploy_webapp.yml
+├── roles/
+│   ├── webserver/
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   ├── handlers/
+│   │   │   └── main.yml
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   ├── templates/
+│   │   │   └── nginx.conf.j2
+│   │   └── meta/
+│   │       └── main.yml
+│   ├── database/
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   ├── handlers/
+│   │   │   └── main.yml
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── meta/
+│   │       └── main.yml
+│   ├── backend/
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   ├── handlers/
+│   │   │   └── main.yml
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   ├── templates/
+│   │   │   └── gunicorn.service.j2
+│   │   └── meta/
+│   │       └── main.yml
+│   └── loadbalancer/
+│       ├── defaults/
+│       │   └── main.yml
+│       ├── handlers/
+│       │   └── main.yml
+│       ├── tasks/
+│       │   └── main.yml
+│       ├── templates/
+│       │   └── haproxy.cfg.j2
+│       └── meta/
+│           └── main.yml
+├── requirements.yml
+└── vault_pass.txt  # Excluded via .gitignore
