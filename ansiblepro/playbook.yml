@@ -1,0 +1,7 @@
+---
+
+- hosts: linux
+  become: true
+  roles:
+#    - basic
+    - webserver

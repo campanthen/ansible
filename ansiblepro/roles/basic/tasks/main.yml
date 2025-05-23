@@ -1,0 +1,5 @@
+---
+# tasks file for basic
+- name: update repo
+    apt:
+      update_cache: yes

@@ -1,0 +1,10 @@
+body.bg-gradient {
+  background: linear-gradient(135deg, #0061ff, #60efff);
+  min-height: 100vh;
+}
+
+.logo-text {
+  font-weight: 600;
+  color: #0061ff;
+  font-size: 1.5rem;
+}

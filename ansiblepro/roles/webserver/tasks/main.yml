@@ -1,0 +1,28 @@
+---
+# tasks file for webserver
+- name: INSTALL NGINX
+  apt: 
+    name: nginx
+    state: present 
+    
+- name: ENSURE ngins is running 
+  service:
+    name: nginx 
+    state: started 
+    enabled: yes
+- name: Deploy nginx configuration
+  template: 
+    src: default.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: 0644
+  notify: RELOAD NGINX
+- name: copy website files to nginx root
+  copy:
+    src: html/
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    mode: 0644
+  notify: RELOAD NGINX
