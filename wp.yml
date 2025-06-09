@@ -1,0 +1,39 @@
+---
+- name: Set up wordpress on apache web server
+  hosts: 192.168.100.60
+  become: yes
+  tasks:
+   - name:
+     apt: 
+       name:
+         - apache2
+         - php
+         - php-mysql
+         - mariadb-client
+         - unzip
+       state: present
+
+   - name: Ensure Apache is running
+     service: 
+       name: apache2
+       state: started
+       enabled: true
+   - name: Donwload latest wordpress version
+     get_url: 
+       url: https://wordpress.org/latest.zip
+       dest: /tmp/wordpress.zip
+   - name: Unzip Wordpress
+     unarchive:
+       src: /tmp/wordpress.zip
+       dest: /tmp/
+       remote_src: yes
+   - name: Move wordpress files to web root
+     command: mv /tmp/wordpress /var/www/html 
+   - name: Set ownership and permissions
+     file:
+       path: /var/www/html
+       owner: www-data
+       group: www-data
+       mode: '0775'
+       recurse: yes
+       state: directory 
